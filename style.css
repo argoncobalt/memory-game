@@ -1,0 +1,945 @@
+@font-face {
+ font-family: 'AmerTypeMdBTMedium';
+ src: url('fonts/amrtypen-webfont.eot');
+ src: url('fonts/amrtypen-webfont.eot?iefix') format('eot'),  url('fonts/amrtypen-webfont.woff') format('woff'),  url('fonts/amrtypen-webfont.ttf') format('truetype'),  url('fonts/amrtypen-webfont.svg#webfontQNrSfsQY') format('svg');
+ font-weight: lighter;
+ font-style: lighter;
+}
+
+		body {
+			font-family: 'AmerTypeMdBTMedium', Courier, "Courier New";
+			font-weight: lighter;
+ 			font-style: lighter;
+		}
+		
+		h1 {
+			text-align:center;
+			font-size:40px;
+		}
+		
+		#container {
+			width:760px;
+			position:absolute;
+		}
+		
+		#congratulations {
+			display: none;
+			width:760px;
+			position: absolute;
+			z-index:1100;
+			color: #ff0000;
+			text-align:center;
+			height:850px;
+			font-size:30px;
+			line-height:400px;
+		}
+		
+		@media only screen and (min-width: 700px) {
+			#container {
+				margin-left:-380px;
+				left:50%;
+			}
+			
+			#congratulations {
+				margin-left:-380px;
+				left:50%;
+			}
+			
+		}
+		
+		@media only screen and (max-width: 700px) {
+			#container {
+				margin-left:10px;
+			}
+			#congratulations {
+				margin-left:10px;
+			}
+		}
+		
+		.panel {
+			float: left;
+			width: 150px;
+			height: 150px;
+			margin: 20px;
+			position: relative;
+			-webkit-perspective: 600px;
+			-moz-perspective: 600px;
+		}
+		
+		/* -- Y axis rotation and general style for heart card -- */
+		
+		.heart .front {
+			float: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 900;
+			width: inherit;
+			height: inherit;
+			border: 0;
+			background: #333;
+			text-align: center;
+
+			-moz-box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+			-webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+			box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+
+			-webkit-transform: rotateX(0deg) rotateY(0deg);
+			-webkit-transform-style: preserve-3d;
+			-webkit-backface-visibility: hidden;
+
+			-moz-transform: rotateX(0deg) rotateY(0deg);
+			-moz-transform-style: preserve-3d;
+			-moz-backface-visibility: hidden;
+
+			-o-transition: all .4s ease-in-out;
+			-ms-transition: all .4s ease-in-out;
+			-moz-transition: all .4s ease-in-out;
+			-webkit-transition: all .4s ease-in-out;
+			transition: all .4s ease-in-out;
+		}
+		.heart.flip .front {
+			z-index: 900;
+			background: #333;
+
+			-webkit-transform: rotateY(180deg);
+			-moz-transform: rotateY(180deg);
+			
+			-moz-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			-webkit-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+		}
+		
+		.heart .back {
+			float: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 800;
+			width: inherit;
+			height: inherit;
+			border: 0;
+			background: url('images/card-01.png') 0 0 no-repeat;
+			text-shadow: 1px  1px 1px rgba(0,0,0,0.6); 
+			
+			-webkit-transform: rotateY(-180deg);
+			-webkit-transform-style: preserve-3d;
+			-webkit-backface-visibility: hidden;
+
+			-moz-transform: rotateY(-180deg);
+			-moz-transform-style: preserve-3d;
+			-moz-backface-visibility: hidden;
+
+			-o-transition: all .4s ease-in-out;
+			-ms-transition: all .4s ease-in-out;
+			-moz-transition: all .4s ease-in-out;
+			-webkit-transition: all .4s ease-in-out;
+			transition: all .4s ease-in-out;
+		}
+		
+		.heart.flip .back {
+			z-index: 1000;
+			background: url('images/card-01.png') 0 0 no-repeat;
+
+			-webkit-transform: rotateX(0deg) rotateY(0deg);
+			-moz-transform: rotateX(0deg) rotateY(0deg);
+
+			box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			-moz-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			-webkit-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+		}
+		
+		#heart-01.moveToPile {
+			transform: translate(760px,0px);
+			-ms-transform: translate(760px,0px); /* IE 9 */
+			-webkit-transform: translate(760px,0px); /* Safari and Chrome */
+			
+		    -webkit-transition: all 2s ease-in-out;
+    		-moz-transition: all 2s ease-in-out;
+    		-o-transition: all 2s ease-in-out;
+    		-ms-transition: all 2s ease-in-out;
+    		transition: all 2s ease-in-out;
+		}
+		
+		#heart-02.moveToPile {
+			transform: translate(570px,-190px);
+			-ms-transform: translate(570px,-190px); /* IE 9 */
+			-webkit-transform: translate(570px,-190px); /* Safari and Chrome */
+			
+		    -webkit-transition: all 2s ease-in-out;
+    		-moz-transition: all 2s ease-in-out;
+    		-o-transition: all 2s ease-in-out;
+    		-ms-transition: all 2s ease-in-out;
+    		transition: all 2s ease-in-out;
+		}
+		
+		/* -- Y axis rotation and general style for yin yang card -- */
+		
+		.yinyang .front {
+			float: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 900;
+			width: inherit;
+			height: inherit;
+			border: 0;
+			background: #333;
+			text-align: center;
+
+			-moz-box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+			-webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+			box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+
+			-webkit-transform: rotateX(0deg) rotateY(0deg);
+			-webkit-transform-style: preserve-3d;
+			-webkit-backface-visibility: hidden;
+
+			-moz-transform: rotateX(0deg) rotateY(0deg);
+			-moz-transform-style: preserve-3d;
+			-moz-backface-visibility: hidden;
+
+			-o-transition: all .4s ease-in-out;
+			-ms-transition: all .4s ease-in-out;
+			-moz-transition: all .4s ease-in-out;
+			-webkit-transition: all .4s ease-in-out;
+			transition: all .4s ease-in-out;
+		}
+		.yinyang.flip .front {
+			z-index: 900;
+			background: #333;
+
+			-webkit-transform: rotateY(180deg);
+			-moz-transform: rotateY(180deg);
+			
+			-moz-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			-webkit-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+		}
+		
+		.yinyang .back {
+			float: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 800;
+			width: inherit;
+			height: inherit;
+			border: 0;
+			background: url('images/card-07.png') 0 0 no-repeat;
+			text-shadow: 1px  1px 1px rgba(0,0,0,0.6); 
+			
+			-webkit-transform: rotateY(-180deg);
+			-webkit-transform-style: preserve-3d;
+			-webkit-backface-visibility: hidden;
+
+			-moz-transform: rotateY(-180deg);
+			-moz-transform-style: preserve-3d;
+			-moz-backface-visibility: hidden;
+
+			-o-transition: all .4s ease-in-out;
+			-ms-transition: all .4s ease-in-out;
+			-moz-transition: all .4s ease-in-out;
+			-webkit-transition: all .4s ease-in-out;
+			transition: all .4s ease-in-out;
+		}
+		
+		.yinyang.flip .back {
+			z-index: 1000;
+			background: url('images/card-07.png') 0 0 no-repeat;
+
+			-webkit-transform: rotateX(0deg) rotateY(0deg);
+			-moz-transform: rotateX(0deg) rotateY(0deg);
+
+			box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			-moz-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			-webkit-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+		}
+		
+		#yinyang-01.moveToPile {
+			transform: translate(380px,0px);
+			-ms-transform: translate(380px,0px); /* IE 9 */
+			-webkit-transform: translate(380px,0px); /* Safari and Chrome */
+			
+		    -webkit-transition: all 2s ease-in-out;
+    		-moz-transition: all 2s ease-in-out;
+    		-o-transition: all 2s ease-in-out;
+    		-ms-transition: all 2s ease-in-out;
+    		transition: all 2s ease-in-out;
+		}
+		
+		#yinyang-02.moveToPile {
+			transform: translate(760px,-570px);
+			-ms-transform: translate(760px,-570px); /* IE 9 */
+			-webkit-transform: translate(760px,-570px); /* Safari and Chrome */
+			
+		    -webkit-transition: all 2s ease-in-out;
+    		-moz-transition: all 2s ease-in-out;
+    		-o-transition: all 2s ease-in-out;
+    		-ms-transition: all 2s ease-in-out;
+    		transition: all 2s ease-in-out;
+		}
+		
+		
+		
+		/* -- Y axis rotation and general style for star card -- */
+		
+		.star .front {
+			float: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 900;
+			width: inherit;
+			height: inherit;
+			border: 0;
+			background: #333;
+			text-align: center;
+
+			-moz-box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+			-webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+			box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+
+			-webkit-transform: rotateX(0deg) rotateY(0deg);
+			-webkit-transform-style: preserve-3d;
+			-webkit-backface-visibility: hidden;
+
+			-moz-transform: rotateX(0deg) rotateY(0deg);
+			-moz-transform-style: preserve-3d;
+			-moz-backface-visibility: hidden;
+
+			-o-transition: all .4s ease-in-out;
+			-ms-transition: all .4s ease-in-out;
+			-moz-transition: all .4s ease-in-out;
+			-webkit-transition: all .4s ease-in-out;
+			transition: all .4s ease-in-out;
+		}
+		.star.flip .front {
+			z-index: 900;
+			background: #333;
+
+			-webkit-transform: rotateY(180deg);
+			-moz-transform: rotateY(180deg);
+			
+			-moz-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			-webkit-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+		}
+		
+		.star .back {
+			float: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 800;
+			width: inherit;
+			height: inherit;
+			border: 0;
+			background: url('images/card-04.png') 0 0 no-repeat;
+			text-shadow: 1px  1px 1px rgba(0,0,0,0.6); 
+			
+			-webkit-transform: rotateY(-180deg);
+			-webkit-transform-style: preserve-3d;
+			-webkit-backface-visibility: hidden;
+
+			-moz-transform: rotateY(-180deg);
+			-moz-transform-style: preserve-3d;
+			-moz-backface-visibility: hidden;
+
+			-o-transition: all .4s ease-in-out;
+			-ms-transition: all .4s ease-in-out;
+			-moz-transition: all .4s ease-in-out;
+			-webkit-transition: all .4s ease-in-out;
+			transition: all .4s ease-in-out;
+		}
+		
+		.star.flip .back {
+			z-index: 1000;
+			background: url('images/card-04.png') 0 0 no-repeat;
+
+			-webkit-transform: rotateX(0deg) rotateY(0deg);
+			-moz-transform: rotateX(0deg) rotateY(0deg);
+
+			box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			-moz-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			-webkit-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+		}
+		
+		#star-01.moveToPile {
+			transform: translate(190px,0px);
+			-ms-transform: translate(190px,0px); /* IE 9 */
+			-webkit-transform: translate(190px,0px); /* Safari and Chrome */
+			
+		    -webkit-transition: all 2s ease-in-out;
+    		-moz-transition: all 2s ease-in-out;
+    		-o-transition: all 2s ease-in-out;
+    		-ms-transition: all 2s ease-in-out;
+    		transition: all 2s ease-in-out;
+		}
+		
+		#star-02.moveToPile {
+			transform: translate(380px,-190px);
+			-ms-transform: translate(380px,-190px); /* IE 9 */
+			-webkit-transform: translate(380px,-190px); /* Safari and Chrome */
+			
+		    -webkit-transition: all 2s ease-in-out;
+    		-moz-transition: all 2s ease-in-out;
+    		-o-transition: all 2s ease-in-out;
+    		-ms-transition: all 2s ease-in-out;
+    		transition: all 2s ease-in-out;
+		}
+		
+		/* -- Y axis rotation and general style for smiley card -- */
+		
+		.smiley .front {
+			float: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 900;
+			width: inherit;
+			height: inherit;
+			border: 0;
+			background: #333;
+			text-align: center;
+
+			-moz-box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+			-webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+			box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+
+			-webkit-transform: rotateX(0deg) rotateY(0deg);
+			-webkit-transform-style: preserve-3d;
+			-webkit-backface-visibility: hidden;
+
+			-moz-transform: rotateX(0deg) rotateY(0deg);
+			-moz-transform-style: preserve-3d;
+			-moz-backface-visibility: hidden;
+
+			-o-transition: all .4s ease-in-out;
+			-ms-transition: all .4s ease-in-out;
+			-moz-transition: all .4s ease-in-out;
+			-webkit-transition: all .4s ease-in-out;
+			transition: all .4s ease-in-out;
+		}
+		.smiley.flip .front {
+			z-index: 900;
+			background: #333;
+
+			-webkit-transform: rotateY(180deg);
+			-moz-transform: rotateY(180deg);
+			
+			-moz-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			-webkit-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+		}
+		
+		.smiley .back {
+			float: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 800;
+			width: inherit;
+			height: inherit;
+			border: 0;
+			background: url('images/card-02.png') 0 0 no-repeat;
+			text-shadow: 1px  1px 1px rgba(0,0,0,0.6); 
+			
+			-webkit-transform: rotateY(-180deg);
+			-webkit-transform-style: preserve-3d;
+			-webkit-backface-visibility: hidden;
+
+			-moz-transform: rotateY(-180deg);
+			-moz-transform-style: preserve-3d;
+			-moz-backface-visibility: hidden;
+
+			-o-transition: all .4s ease-in-out;
+			-ms-transition: all .4s ease-in-out;
+			-moz-transition: all .4s ease-in-out;
+			-webkit-transition: all .4s ease-in-out;
+			transition: all .4s ease-in-out;
+		}
+		
+		.smiley.flip .back {
+			z-index: 1000;
+			background: url('images/card-02.png') 0 0 no-repeat;
+
+			-webkit-transform: rotateX(0deg) rotateY(0deg);
+			-moz-transform: rotateX(0deg) rotateY(0deg);
+
+			box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			-moz-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			-webkit-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+		}
+		
+		#smiley-01.moveToPile {
+			transform: translate(190px,-190px);
+			-ms-transform: translate(190px,-190px); /* IE 9 */
+			-webkit-transform: translate(190px,-190px); /* Safari and Chrome */
+			
+		    -webkit-transition: all 2s ease-in-out;
+    		-moz-transition: all 2s ease-in-out;
+    		-o-transition: all 2s ease-in-out;
+    		-ms-transition: all 2s ease-in-out;
+    		transition: all 2s ease-in-out;
+		}
+		
+		#smiley-02.moveToPile {
+			transform: translate(570px, 0px);
+			-ms-transform: translate(570px,0px); /* IE 9 */
+			-webkit-transform: translate(570px,0px); /* Safari and Chrome */
+			
+		    -webkit-transition: all 2s ease-in-out;
+    		-moz-transition: all 2s ease-in-out;
+    		-o-transition: all 2s ease-in-out;
+    		-ms-transition: all 2s ease-in-out;
+    		transition: all 2s ease-in-out;
+		}
+		
+		/* -- Y axis rotation and general style for peace card -- */
+		
+		.peace .front {
+			float: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 900;
+			width: inherit;
+			height: inherit;
+			border: 0;
+			background: #333;
+			text-align: center;
+
+			-moz-box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+			-webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+			box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+
+			-webkit-transform: rotateX(0deg) rotateY(0deg);
+			-webkit-transform-style: preserve-3d;
+			-webkit-backface-visibility: hidden;
+
+			-moz-transform: rotateX(0deg) rotateY(0deg);
+			-moz-transform-style: preserve-3d;
+			-moz-backface-visibility: hidden;
+
+			-o-transition: all .4s ease-in-out;
+			-ms-transition: all .4s ease-in-out;
+			-moz-transition: all .4s ease-in-out;
+			-webkit-transition: all .4s ease-in-out;
+			transition: all .4s ease-in-out;
+		}
+		.peace.flip .front {
+			z-index: 900;
+			background: #333;
+
+			-webkit-transform: rotateY(180deg);
+			-moz-transform: rotateY(180deg);
+			
+			-moz-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			-webkit-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+		}
+		
+		.peace .back {
+			float: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 800;
+			width: inherit;
+			height: inherit;
+			border: 0;
+			background: url('images/card-03.png') 0 0 no-repeat;
+			text-shadow: 1px  1px 1px rgba(0,0,0,0.6); 
+			
+			-webkit-transform: rotateY(-180deg);
+			-webkit-transform-style: preserve-3d;
+			-webkit-backface-visibility: hidden;
+
+			-moz-transform: rotateY(-180deg);
+			-moz-transform-style: preserve-3d;
+			-moz-backface-visibility: hidden;
+
+			-o-transition: all .4s ease-in-out;
+			-ms-transition: all .4s ease-in-out;
+			-moz-transition: all .4s ease-in-out;
+			-webkit-transition: all .4s ease-in-out;
+			transition: all .4s ease-in-out;
+		}
+		
+		.peace.flip .back {
+			z-index: 1000;
+			background: url('images/card-03.png') 0 0 no-repeat;
+
+			-webkit-transform: rotateX(0deg) rotateY(0deg);
+			-moz-transform: rotateX(0deg) rotateY(0deg);
+
+			box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			-moz-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			-webkit-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+		}
+		
+		#peace-01.moveToPile {
+			transform: translate(760px,-380px);
+			-ms-transform: translate(760px,-380px); /* IE 9 */
+			-webkit-transform: translate(760px,-380px); /* Safari and Chrome */
+			
+		    -webkit-transition: all 2s ease-in-out;
+    		-moz-transition: all 2s ease-in-out;
+    		-o-transition: all 2s ease-in-out;
+    		-ms-transition: all 2s ease-in-out;
+    		transition: all 2s ease-in-out;
+		}
+		
+		#peace-02.moveToPile {
+			transform: translate(380px, -380px);
+			-ms-transform: translate(380px,-380px); /* IE 9 */
+			-webkit-transform: translate(380px,-380px); /* Safari and Chrome */
+			
+		    -webkit-transition: all 2s ease-in-out;
+    		-moz-transition: all 2s ease-in-out;
+    		-o-transition: all 2s ease-in-out;
+    		-ms-transition: all 2s ease-in-out;
+    		transition: all 2s ease-in-out;
+		}
+		
+		/* -- Y axis rotation and general style for crescent card -- */
+		
+		.crescent .front {
+			float: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 900;
+			width: inherit;
+			height: inherit;
+			border: 0;
+			background: #333;
+			text-align: center;
+
+			-moz-box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+			-webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+			box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+
+			-webkit-transform: rotateX(0deg) rotateY(0deg);
+			-webkit-transform-style: preserve-3d;
+			-webkit-backface-visibility: hidden;
+
+			-moz-transform: rotateX(0deg) rotateY(0deg);
+			-moz-transform-style: preserve-3d;
+			-moz-backface-visibility: hidden;
+
+			-o-transition: all .4s ease-in-out;
+			-ms-transition: all .4s ease-in-out;
+			-moz-transition: all .4s ease-in-out;
+			-webkit-transition: all .4s ease-in-out;
+			transition: all .4s ease-in-out;
+		}
+		.crescent.flip .front {
+			z-index: 900;
+			background: #333;
+
+			-webkit-transform: rotateY(180deg);
+			-moz-transform: rotateY(180deg);
+			
+			-moz-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			-webkit-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+		}
+		
+		.crescent .back {
+			float: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 800;
+			width: inherit;
+			height: inherit;
+			border: 0;
+			background: url('images/card-05.png') 0 0 no-repeat;
+			text-shadow: 1px  1px 1px rgba(0,0,0,0.6); 
+			
+			-webkit-transform: rotateY(-180deg);
+			-webkit-transform-style: preserve-3d;
+			-webkit-backface-visibility: hidden;
+
+			-moz-transform: rotateY(-180deg);
+			-moz-transform-style: preserve-3d;
+			-moz-backface-visibility: hidden;
+
+			-o-transition: all .4s ease-in-out;
+			-ms-transition: all .4s ease-in-out;
+			-moz-transition: all .4s ease-in-out;
+			-webkit-transition: all .4s ease-in-out;
+			transition: all .4s ease-in-out;
+		}
+		
+		.crescent.flip .back {
+			z-index: 1000;
+			background: url('images/card-05.png') 0 0 no-repeat;
+
+			-webkit-transform: rotateX(0deg) rotateY(0deg);
+			-moz-transform: rotateX(0deg) rotateY(0deg);
+
+			box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			-moz-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			-webkit-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+		}
+		
+		#crescent-01.moveToPile {
+			transform: translate(190px,-380px);
+			-ms-transform: translate(190px,-380px); /* IE 9 */
+			-webkit-transform: translate(190px,-380px); /* Safari and Chrome */
+			
+		    -webkit-transition: all 2s ease-in-out;
+    		-moz-transition: all 2s ease-in-out;
+    		-o-transition: all 2s ease-in-out;
+    		-ms-transition: all 2s ease-in-out;
+    		transition: all 2s ease-in-out;
+		}
+		
+		#crescent-02.moveToPile {
+			transform: translate(760px, -190px);
+			-ms-transform: translate(760px,-190px); /* IE 9 */
+			-webkit-transform: translate(760px,-190px); /* Safari and Chrome */
+			
+		    -webkit-transition: all 2s ease-in-out;
+    		-moz-transition: all 2s ease-in-out;
+    		-o-transition: all 2s ease-in-out;
+    		-ms-transition: all 2s ease-in-out;
+    		transition: all 2s ease-in-out;
+		}
+		
+		/* -- Y axis rotation and general style for target card -- */
+		
+		.target .front {
+			float: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 900;
+			width: inherit;
+			height: inherit;
+			border: 0;
+			background: #333;
+			text-align: center;
+
+			-moz-box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+			-webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+			box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+
+			-webkit-transform: rotateX(0deg) rotateY(0deg);
+			-webkit-transform-style: preserve-3d;
+			-webkit-backface-visibility: hidden;
+
+			-moz-transform: rotateX(0deg) rotateY(0deg);
+			-moz-transform-style: preserve-3d;
+			-moz-backface-visibility: hidden;
+
+			-o-transition: all .4s ease-in-out;
+			-ms-transition: all .4s ease-in-out;
+			-moz-transition: all .4s ease-in-out;
+			-webkit-transition: all .4s ease-in-out;
+			transition: all .4s ease-in-out;
+		}
+		.target.flip .front {
+			z-index: 900;
+			background: #333;
+
+			-webkit-transform: rotateY(180deg);
+			-moz-transform: rotateY(180deg);
+			
+			-moz-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			-webkit-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+		}
+		
+		.target .back {
+			float: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 800;
+			width: inherit;
+			height: inherit;
+			border: 0;
+			background: url('images/card-06.png') 0 0 no-repeat;
+			text-shadow: 1px  1px 1px rgba(0,0,0,0.6); 
+			
+			-webkit-transform: rotateY(-180deg);
+			-webkit-transform-style: preserve-3d;
+			-webkit-backface-visibility: hidden;
+
+			-moz-transform: rotateY(-180deg);
+			-moz-transform-style: preserve-3d;
+			-moz-backface-visibility: hidden;
+
+			-o-transition: all .4s ease-in-out;
+			-ms-transition: all .4s ease-in-out;
+			-moz-transition: all .4s ease-in-out;
+			-webkit-transition: all .4s ease-in-out;
+			transition: all .4s ease-in-out;
+		}
+		
+		.target.flip .back {
+			z-index: 1000;
+			background: url('images/card-06.png') 0 0 no-repeat;
+
+			-webkit-transform: rotateX(0deg) rotateY(0deg);
+			-moz-transform: rotateX(0deg) rotateY(0deg);
+
+			box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			-moz-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			-webkit-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+		}
+		
+		#target-01.moveToPile {
+			transform: translate(570px,-570px);
+			-ms-transform: translate(570px,-570px); /* IE 9 */
+			-webkit-transform: translate(570px,-570px); /* Safari and Chrome */
+			
+		    -webkit-transition: all 2s ease-in-out;
+    		-moz-transition: all 2s ease-in-out;
+    		-o-transition: all 2s ease-in-out;
+    		-ms-transition: all 2s ease-in-out;
+    		transition: all 2s ease-in-out;
+		}
+		
+		#target-02.moveToPile {
+			transform: translate(380px, -570px);
+			-ms-transform: translate(380px,-570px); /* IE 9 */
+			-webkit-transform: translate(380px,-570px); /* Safari and Chrome */
+			
+		    -webkit-transition: all 2s ease-in-out;
+    		-moz-transition: all 2s ease-in-out;
+    		-o-transition: all 2s ease-in-out;
+    		-ms-transition: all 2s ease-in-out;
+    		transition: all 2s ease-in-out;
+		}
+		
+		/* -- Y axis rotation and general style for swirl card -- */
+		
+		.swirl .front {
+			float: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 900;
+			width: inherit;
+			height: inherit;
+			border: 0;
+			background: #333;
+			text-align: center;
+
+			-moz-box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+			-webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+			box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+
+			-webkit-transform: rotateX(0deg) rotateY(0deg);
+			-webkit-transform-style: preserve-3d;
+			-webkit-backface-visibility: hidden;
+
+			-moz-transform: rotateX(0deg) rotateY(0deg);
+			-moz-transform-style: preserve-3d;
+			-moz-backface-visibility: hidden;
+
+			-o-transition: all .4s ease-in-out;
+			-ms-transition: all .4s ease-in-out;
+			-moz-transition: all .4s ease-in-out;
+			-webkit-transition: all .4s ease-in-out;
+			transition: all .4s ease-in-out;
+		}
+		.swirl.flip .front {
+			z-index: 900;
+			background: #333;
+
+			-webkit-transform: rotateY(180deg);
+			-moz-transform: rotateY(180deg);
+			
+			-moz-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			-webkit-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+		}
+		
+		.swirl .back {
+			float: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 800;
+			width: inherit;
+			height: inherit;
+			border: 0;
+			background: url('images/card-08.png') 0 0 no-repeat;
+			text-shadow: 1px  1px 1px rgba(0,0,0,0.6); 
+			
+			-webkit-transform: rotateY(-180deg);
+			-webkit-transform-style: preserve-3d;
+			-webkit-backface-visibility: hidden;
+
+			-moz-transform: rotateY(-180deg);
+			-moz-transform-style: preserve-3d;
+			-moz-backface-visibility: hidden;
+
+			-o-transition: all .4s ease-in-out;
+			-ms-transition: all .4s ease-in-out;
+			-moz-transition: all .4s ease-in-out;
+			-webkit-transition: all .4s ease-in-out;
+			transition: all .4s ease-in-out;
+		}
+		
+		.swirl.flip .back {
+			z-index: 1000;
+			background: url('images/card-08.png') 0 0 no-repeat;
+
+			-webkit-transform: rotateX(0deg) rotateY(0deg);
+			-moz-transform: rotateX(0deg) rotateY(0deg);
+
+			box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			-moz-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+			-webkit-box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+		}
+		
+		#swirl-01.moveToPile {
+			transform: translate(190px,-570px);
+			-ms-transform: translate(190px,-570px); /* IE 9 */
+			-webkit-transform: translate(190px,-570px); /* Safari and Chrome */
+			
+		    -webkit-transition: all 2s ease-in-out;
+    		-moz-transition: all 2s ease-in-out;
+    		-o-transition: all 2s ease-in-out;
+    		-ms-transition: all 2s ease-in-out;
+    		transition: all 2s ease-in-out;
+		}
+		
+		#swirl-02.moveToPile {
+			transform: translate(570px, -380px);
+			-ms-transform: translate(570px,-380px); /* IE 9 */
+			-webkit-transform: translate(570px,-380px); /* Safari and Chrome */
+			
+		    -webkit-transition: all 2s ease-in-out;
+    		-moz-transition: all 2s ease-in-out;
+    		-o-transition: all 2s ease-in-out;
+    		-ms-transition: all 2s ease-in-out;
+    		transition: all 2s ease-in-out;
+		}
+		
+		/* -- X axis rotation for all click panels -- */
+		.click .front {
+			cursor: pointer;
+			-webkit-transform: rotateX(0deg);
+			-moz-transform: rotateX(0deg);
+		}
+		.click.flip .front {
+			-webkit-transform: rotateX(180deg);
+			-moz-transform: rotateX(180deg);
+		}
+		.click .back {
+			cursor: pointer;
+			-webkit-transform: rotateX(-180deg);
+			-moz-transform: rotateX(-180deg);
+		}
+		.click.flip .back {
+			-webkit-transform: rotateX(0deg);
+			-moz-transform: rotateX(0deg);
+		}
